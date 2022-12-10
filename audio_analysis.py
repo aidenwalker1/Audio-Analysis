@@ -3,6 +3,7 @@ from pydub import AudioSegment
 import os
 import math
 
+# directory where the audio files are
 root = "C:/Users/awalker/Downloads/audio/audio"
 files = os.listdir(root)
 
@@ -53,16 +54,18 @@ for file in files :
       # creating a listened audio
       with sr.AudioFile(chunk_name) as chunk_audio:
          chunk_listened = recognizer.listen(chunk_audio)
+
       # recognizing content from the audio
       try:
          # getting content from the chunk
          content = recognizer.recognize_vosk(chunk_listened)
-         # writing to the file
+
+         # writing to the file, removes the premade vosk format
          audio_text.write(content[14:-3] + ' ')
       # if not recognized
       except sr.UnknownValueError:
          print('Audio is not recognized')
-      # internet error
+      # request error if incorrectly setup
       except sr.RequestError as Error:
          print('Request Error')
 
