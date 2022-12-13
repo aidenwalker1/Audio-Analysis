@@ -4,7 +4,7 @@ import os
 import math
 
 # directory where the audio files are
-root = "C:/Users/awalker/Downloads/audio/audio"
+root = "C:/Users/awalker/Downloads/reduced"
 files = os.listdir(root)
 
 # open output file
@@ -26,13 +26,13 @@ for file in files :
    # get file name
    file_name = root + '/' + file
 
-   audio = AudioSegment.from_file(file_name, format='m4a')
+   audio = AudioSegment.from_file(file_name, format='wav')
 
    # length of the audio in milliseconds
    audio_length = len(audio)
    print(f'Audio Length: {audio_length}')
 
-   split_size = 8000
+   split_size = 6000
 
    # get number of 8 second chunks
    chunk_count = len(audio) / split_size
@@ -54,7 +54,7 @@ for file in files :
       # creating a listened audio
       with sr.AudioFile(chunk_name) as chunk_audio:
          chunk_listened = recognizer.listen(chunk_audio)
-
+         
       # recognizing content from the audio
       try:
          # getting content from the chunk
