@@ -2,9 +2,15 @@ import speech_recognition as sr
 from pydub import AudioSegment
 import os
 import math
+import sys
 
 # directory where the audio files are
 root = "C:/Users/awalker/Downloads/reduced"
+if sys.argv.count > 1 :
+   root = sys.argv[1]
+if not os.path.exists(root) or not os.path.isdir(root):
+   print('Could not open containing folder')
+   exit()
 files = os.listdir(root)
 
 # open output file
